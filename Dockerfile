@@ -1,9 +1,3 @@
-FROM ubuntu:rolling
+FROM foliant/foliant:slim
 
-RUN apt update && apt install -y git python3 python3-pip
-RUN pip3 install -U pip; pip3 install git+https://github.com/foliant-docs/foliant.git@nextgen
-
-RUN apt install -y locales && locale-gen en_US.UTF-8
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
-
-ENTRYPOINT [ "foliant" ]
+RUN pip3 install foliantcontrib.init
