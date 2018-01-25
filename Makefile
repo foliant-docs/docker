@@ -4,10 +4,10 @@ all:
 	make pandoc
 
 slim:
-	docker build --no-cache -t foliant/foliant:slim -f Dockerfile.slim .
+	docker build --no-cache -t foliant/foliant:slim -f Dockerfile-slim .
 
 latest:
 	docker build --no-cache -t foliant/foliant .
 
 pandoc:
-	docker build --no-cache -t foliant/foliant:pandoc -f Dockerfile.pandoc .
+	docker build --no-cache -t foliant/foliant:pandoc -f Dockerfile-pandoc .
