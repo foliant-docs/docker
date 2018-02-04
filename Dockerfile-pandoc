@@ -3,3 +3,4 @@ FROM foliant/foliant
 RUN apt update && apt install -y wget texlive-full librsvg2-bin
 RUN wget https://github.com/jgm/pandoc/releases/download/2.0.5/pandoc-2.0.5-1-amd64.deb && \
     dpkg -i pandoc-2.0.5-1-amd64.deb
+RUN pip3 install foliantcontrib.pandoc
