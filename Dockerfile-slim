@@ -1,4 +1,4 @@
-FROM ubuntu:artful
+FROM ubuntu:cosmic
 
 LABEL authors="Konstantin Molchanov <moigagoo@live.com>"
 
