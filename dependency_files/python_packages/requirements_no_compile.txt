@@ -1,0 +1,1 @@
+foliantcontrib.templates.preprocessor >= 1.0.3

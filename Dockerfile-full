@@ -1,0 +1,44 @@
+FROM foliant/foliant:pandoc
+
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app/
+
+RUN apt update
+
+COPY ./dependency_files/ /usr/src/app/dependency_files/
+
+RUN apt install -y inkscape
+
+RUN rm -rf /etc/ImageMagick-6/policy.xml \
+    && cp /usr/src/app/dependency_files/imagemagick/policy.xml /etc/ImageMagick-6/
+
+RUN wget -q -O - https://deb.nodesource.com/setup_11.x | bash
+
+RUN apt install -y nodejs
+
+RUN npm install puppeteer@1.20.0
+
+RUN npm install -g widdershins
+
+RUN npm install -g mermaid
+RUN npm install -g mermaid.cli --unsafe-perm=true --allow-root
+
+RUN apt install -y zlib1g-dev ruby-full \
+    && gem install bundler -v 1.17.2 \
+    && cd /usr/src/app/dependency_files/slate/ \
+    && bundle install
+
+# Needed for Confluence backend
+RUN apt install -y libkrb5-dev
+
+RUN apt install -y graphviz libgraphviz-dev
+
+RUN apt install -y plantuml && wget -O /usr/share/plantuml/plantuml.jar http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
+
+RUN pip3 install --upgrade pip
+
+RUN cd /usr/src/app/dependency_files/python_packages/ \
+    && pip3 install -r ./requirements.txt \
+    && pip3 install --no-compile -r ./requirements_no_compile.txt
+
+ENV PLANTUML_LIMIT_SIZE 100000
