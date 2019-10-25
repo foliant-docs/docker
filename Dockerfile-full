@@ -16,16 +16,19 @@ RUN wget -q -O - https://deb.nodesource.com/setup_11.x | bash
 
 RUN apt install -y nodejs
 
-RUN npm install puppeteer@1.20.0
+RUN npm install puppeteer@2.0.0
 
 RUN npm install -g widdershins
 
 RUN npm install -g mermaid
 RUN npm install -g mermaid.cli --unsafe-perm=true --allow-root
 
-RUN apt install -y zlib1g-dev ruby-full \
-    && gem install bundler -v 1.17.2 \
+RUN mkdir -p /usr/src/app/dependency_files/slate/ \
     && cd /usr/src/app/dependency_files/slate/ \
+    && wget -O ./Gemfile https://raw.githubusercontent.com/slatedocs/slate/master/Gemfile \
+    && wget -O ./Gemfile.lock https://raw.githubusercontent.com/slatedocs/slate/master/Gemfile.lock \
+    && apt install -y zlib1g-dev ruby-full \
+    && gem install bundler -v 2.0.2 \
     && bundle install
 
 # Needed for Confluence backend
