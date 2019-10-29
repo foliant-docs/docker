@@ -20,8 +20,10 @@ RUN npm install puppeteer@2.0.0
 
 RUN npm install -g widdershins
 
-RUN npm install -g mermaid
-RUN npm install -g mermaid.cli --unsafe-perm=true --allow-root
+RUN npm install -g mermaid \
+    && npm install -g mermaid.cli --unsafe-perm=true --allow-root
+
+RUN npm install -g aglio --unsafe-perm=true --allow-root
 
 RUN mkdir -p /usr/src/app/dependency_files/slate/ \
     && cd /usr/src/app/dependency_files/slate/ \
