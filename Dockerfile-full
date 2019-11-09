@@ -25,6 +25,10 @@ RUN npm install -g mermaid \
 
 RUN npm install -g aglio --unsafe-perm=true --allow-root
 
+RUN npm install -g md-to-pdf --unsafe-perm=true --allow-root
+
+RUN npm install -g raml2html raml2html-full-markdown-theme
+
 RUN mkdir -p /usr/src/app/dependency_files/slate/ \
     && cd /usr/src/app/dependency_files/slate/ \
     && wget -O ./Gemfile https://raw.githubusercontent.com/slatedocs/slate/master/Gemfile \
