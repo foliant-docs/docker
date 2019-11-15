@@ -1,16 +1,17 @@
 FROM foliant/foliant:pandoc
 
-RUN mkdir -p /usr/src/app/
-WORKDIR /usr/src/app/
-
 RUN apt update
 
 COPY ./dependency_files/ /usr/src/app/dependency_files/
 
+# Needed for ImageMagick
 RUN apt install -y inkscape
 
 RUN rm -rf /etc/ImageMagick-6/policy.xml \
     && cp /usr/src/app/dependency_files/imagemagick/policy.xml /etc/ImageMagick-6/
+
+# Needed for Puppeteer
+RUN apt install -y libasound2
 
 RUN wget -q -O - https://deb.nodesource.com/setup_11.x | bash
 
@@ -51,3 +52,5 @@ RUN cd /usr/src/app/dependency_files/python_packages/ \
     && pip3 install --no-compile -r ./requirements_no_compile.txt
 
 ENV PLANTUML_LIMIT_SIZE 100000
+
+WORKDIR /usr/src/app/
