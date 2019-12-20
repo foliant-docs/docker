@@ -1,6 +1,6 @@
 foliantcontrib.admonitions >= 1.0.0
 foliantcontrib.aglio >= 1.0.0
-foliantcontrib.anchors >= 1.0.2
+foliantcontrib.anchors >= 1.0.3
 foliantcontrib.apilinks >= 1.1.3
 foliantcontrib.badges >= 1.0.2
 foliantcontrib.bindsympli >= 1.0.13
@@ -25,7 +25,7 @@ foliantcontrib.init >= 1.0.7
 foliantcontrib.macros >= 1.0.4
 foliantcontrib.mdtopdf >= 1.0.0
 foliantcontrib.mermaid >= 1.0.1
-foliantcontrib.meta >= 1.2.1
+foliantcontrib.meta >= 1.2.2
 foliantcontrib.mkdocs >= 1.0.10
 foliantcontrib.multilinetables >= 1.2.2
 foliantcontrib.multiproject >= 1.0.12
@@ -41,10 +41,12 @@ foliantcontrib.showcommits >= 1.0.1
 foliantcontrib.slate >= 1.0.7
 foliantcontrib.slugs >= 1.0.1
 foliantcontrib.subset >= 1.0.9
+foliantcontrib.superlinks >= 1.0.0
 foliantcontrib.swaggerdoc >= 1.2.1
 foliantcontrib.templateparser >= 1.0.2
 foliantcontrib.testrail >= 1.1.8
 foliantcontrib.utils.combined_options >= 1.0.8
+foliantcontrib.utils.header_anchors >= 1.0.0
 foliantcontrib.utils.preprocessor_ext >= 1.0.2
 
 mkdocs-material
