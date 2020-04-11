@@ -54,7 +54,7 @@ foliantcontrib.utils.combined_options >= 1.0.9
 foliantcontrib.utils.header_anchors >= 1.0.1
 foliantcontrib.utils.preprocessor_ext >= 1.0.3
 
-mkdocs-material
+mkdocs-material == 4.6.3
 pygments
 pymdown-extensions
 
