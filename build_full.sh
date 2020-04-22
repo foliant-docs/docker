@@ -1,9 +1,15 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e
+os_type=`uname`
+
+if [ "${os_type}" == 'Darwin' ] ; then
+    grep_option='E'
+else
+    grep_option='P'
+fi
 
 if [ ! $1 ] ; then
-    FOLIANT_VERSION=1.0.11 # Default version, upgrade it when necessary
+    FOLIANT_VERSION=`curl https://raw.githubusercontent.com/foliant-docs/foliant/develop/foliant/__init__.py | grep -${grep_option}o "\d+\.\d+\.\d+"`
 else
     FOLIANT_VERSION=$1
 fi
