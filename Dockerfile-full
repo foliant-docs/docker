@@ -35,7 +35,7 @@ RUN mkdir -p /usr/src/app/dependency_files/slate/ \
     && wget -O ./Gemfile https://raw.githubusercontent.com/slatedocs/slate/master/Gemfile \
     && wget -O ./Gemfile.lock https://raw.githubusercontent.com/slatedocs/slate/master/Gemfile.lock \
     && apt install -y zlib1g-dev ruby-full \
-    && gem install bundler -v 2.0.2 \
+    && gem install bundler \
     && bundle install
 
 # Needed for Confluence backend
