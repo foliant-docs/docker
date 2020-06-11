@@ -17,7 +17,7 @@ RUN wget -q -O - https://deb.nodesource.com/setup_11.x | bash
 
 RUN apt install -y nodejs
 
-RUN npm install puppeteer@2.0.0
+RUN npm install puppeteer@3.3.0
 
 RUN npm install -g widdershins
 
