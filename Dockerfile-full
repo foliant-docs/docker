@@ -32,8 +32,8 @@ RUN npm install -g raml2html raml2html-full-markdown-theme
 
 RUN mkdir -p /usr/src/app/dependency_files/slate/ \
     && cd /usr/src/app/dependency_files/slate/ \
-    && wget -O ./Gemfile https://raw.githubusercontent.com/slatedocs/slate/master/Gemfile \
-    && wget -O ./Gemfile.lock https://raw.githubusercontent.com/slatedocs/slate/master/Gemfile.lock \
+    && wget -O ./Gemfile https://raw.githubusercontent.com/slatedocs/slate/main/Gemfile \
+    && wget -O ./Gemfile.lock https://raw.githubusercontent.com/slatedocs/slate/main/Gemfile.lock \
     && apt install -y zlib1g-dev ruby-full \
     && gem install bundler \
     && bundle install
