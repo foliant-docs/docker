@@ -2,5 +2,5 @@ FROM foliant/foliant
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && apt install -y wget texlive-full librsvg2-bin
-RUN wget https://github.com/jgm/pandoc/releases/download/2.9.2/pandoc-2.9.2-1-amd64.deb && dpkg -i pandoc-2.9.2-1-amd64.deb
+RUN wget https://github.com/jgm/pandoc/releases/download/2.10/pandoc-2.10-1-amd64.deb && dpkg -i pandoc-2.10-1-amd64.deb
 RUN pip3 install foliantcontrib.pandoc
