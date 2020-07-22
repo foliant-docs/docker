@@ -13,11 +13,11 @@ RUN rm -rf /etc/ImageMagick-6/policy.xml \
 # Needed for Puppeteer
 RUN apt install -y libasound2
 
-RUN wget -q -O - https://deb.nodesource.com/setup_11.x | bash
+RUN wget -q -O - https://deb.nodesource.com/setup_14.x | bash
 
 RUN apt install -y nodejs
 
-RUN npm install puppeteer@3.3.0
+RUN npm install puppeteer@5.2.1
 
 RUN npm install -g widdershins
 
