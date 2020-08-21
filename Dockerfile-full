@@ -19,6 +19,22 @@ RUN apt install -y nodejs
 
 RUN npm install puppeteer@5.2.1
 
+#######################
+# Databases for DBDoc #
+#######################
+
+# MS SQL Server
+RUN apt-get install -y unixodbc-dev
+RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN wget -O /etc/apt/sources.list.d/mssql-release.list https://packages.microsoft.com/config/ubuntu/20.04/prod.list
+RUN apt-get update
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
+
+# MySQL
+RUN apt-get install -y mysql-server libmysqlclient-dev
+
+#######################
+
 RUN npm install -g widdershins
 
 RUN npm install -g mermaid \
