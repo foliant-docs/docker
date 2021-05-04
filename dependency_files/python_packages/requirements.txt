@@ -15,6 +15,7 @@ foliantcontrib.customids >= 1.0.7
 foliantcontrib.confluence >= 0.6.18
 foliantcontrib.dbmldoc >= 0.2.4
 foliantcontrib.dbdoc >= 0.1.6
+foliantcontrib.downloadfile >= 1.0.0
 foliantcontrib.elasticsearch >= 1.0.4
 foliantcontrib.epsconvert >= 1.0.7
 foliantcontrib.escapecode >= 1.0.4
