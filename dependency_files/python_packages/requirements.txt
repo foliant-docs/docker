@@ -66,6 +66,7 @@ foliantcontrib.utils.preprocessor_ext >= 1.0.5
 
 archeme >= 1.0.2
 
+pydbml >= 0.4.1
 mkdocs-material == 4.6.3
 pygments
 pymdown-extensions
