@@ -2,6 +2,8 @@ FROM foliant/foliant:pandoc
 
 RUN apt update
 
+RUN apt install --reinstall ca-certificates
+
 COPY ./dependency_files/ /usr/src/app/dependency_files/
 
 # Needed for ImageMagick
