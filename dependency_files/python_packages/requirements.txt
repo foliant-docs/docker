@@ -63,14 +63,12 @@ foliantcontrib.yaml_include >= 1.0.1
 foliantcontrib.utils >= 1.0.3
 
 archeme >= 1.0.2
-
-pydbml >= 0.4.1
+Jinja2 == 2.11.2
+lxml == 4.8.0
 mkdocs == 1.1.2
 mkdocs-material == 4.6.3
+pydbml >= 0.4.1
 pygments == 2.12.0
 pymdown-extensions == 9.4
-
-lxml == 4.8.0
-Jinja2 == 2.11.2
-schema == 0.7.4
 PyYAML == 5.3.1
+schema == 0.7.4
