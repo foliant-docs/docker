@@ -63,7 +63,7 @@ foliantcontrib.yaml_include >= 1.0.1
 foliantcontrib.utils >= 1.0.3
 
 archeme >= 1.0.2
-Jinja2 == 2.11.2
+Jinja2 == 2.11.3
 lxml == 4.8.0
 MarkupSafe == 2.0.1
 mkdocs == 1.1.2
