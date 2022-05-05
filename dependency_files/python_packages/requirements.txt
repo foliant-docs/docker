@@ -65,6 +65,7 @@ foliantcontrib.utils >= 1.0.3
 archeme >= 1.0.2
 
 pydbml >= 0.4.1
+mkdocs == 1.2.3
 mkdocs-material == 4.6.3
 pygments
 pymdown-extensions
