@@ -65,6 +65,7 @@ foliantcontrib.utils >= 1.0.3
 archeme >= 1.0.2
 Jinja2 == 2.11.2
 lxml == 4.8.0
+MarkupSafe == 2.0.1
 mkdocs == 1.1.2
 mkdocs-material == 4.6.3
 pydbml >= 0.4.1
