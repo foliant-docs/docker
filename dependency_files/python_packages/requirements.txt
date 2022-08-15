@@ -32,7 +32,7 @@ foliantcontrib.imagemagick >= 1.0.2
 foliantcontrib.imgcaptions >= 1.0.3
 foliantcontrib.imgconvert >= 1.0.0
 foliantcontrib.includes >= 1.1.13
-foliantcontrib.init >= 1.0.7
+foliantcontrib.init >= 1.0.9
 foliantcontrib.macros >= 1.0.4
 foliantcontrib.mdtopdf >= 1.0.0
 foliantcontrib.mermaid >= 1.0.2
@@ -64,7 +64,7 @@ foliantcontrib.yaml_include >= 1.0.1
 
 archeme >= 1.0.2
 Jinja2 == 3.1.2
-lxml == 4.8.0
+lxml == 4.9.1
 MarkupSafe == 2.0.1
 mkdocs == 1.3.0
 mkdocs-material == 8.2.14
