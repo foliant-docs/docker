@@ -1,84 +1,74 @@
-# Content
+# Docker
+Docker is a project that helps develop, update and publish Docker images for Foliant.
 
-This repo contains:
+## Overview
+There are four Docker images to build different versions of Foliant. 
+This repo contains Dockerfiles to build each Docker image. 
+Also, each Dockerfile has its own build-and-publish script to publish images to [Docker Hub](https://hub.docker.com/r/foliant/foliant/tags).
 
-1. Four Dockerfiles to build docker images:
-    * Dockerfile-slim — minimal image of Foliant with no extensions
-    * Dockerfile — the basic image with just Foliant core and the `init` command
-    * Dockerfile-pandoc — basic image with the addition of TexLive and Pandoc for building PDF and DOCX
-    * Dockerfile-full — the full image with all official Foliant extensions and third-party tools required for them to work
-   
-   
-2. Each Dockerfile has it's own build-and-publish script to [Docker Hub:](https://hub.docker.com/r/foliant/foliant/tags)
-   * build_slim.sh
-   * build_latest.sh
-   * build_pandoc.sh
-   * build_full.sh
+* `foliant/foliant:slim` — minimal image of Foliant core with no extensions.
+  * [Dockerfile-slim](https://github.com/foliant-docs/docker/blob/master/Dockerfile-slim)
+  * [build_slim.sh](https://github.com/foliant-docs/docker/blob/master/build_slim.sh)
 
+* `foliant/foliant` — the default image with Foliant core and the `init` extension
+  * [Dockerfile](https://github.com/foliant-docs/docker/blob/master/Dockerfile)
+  * [build_latest.sh](https://github.com/foliant-docs/docker/blob/master/build_latest.sh)
+* `foliant/foliant:pandoc` — the default image with foliantcontrib.pandoc and its dependencies:
+TexLive and Pandoc for building PDF and DOCX
+  * [Dockerfile-pandoc](https://github.com/foliant-docs/docker/blob/master/Dockerfile-pandoc)
+  * [build_pandoc.sh](https://github.com/foliant-docs/docker/blob/master/build_pandoc.sh)
+* `foliant/foliant:full` — the full image with all official Foliant extensions and third-party tools required for them to work
+  * [Dockerfile-full](https://github.com/foliant-docs/docker/blob/master/Dockerfile-full)
+  * [build_full.sh](https://github.com/foliant-docs/docker/blob/master/build_full.sh)
 
-3. Makefile to build and test Foliant on local computer
+* [Makefile](https://github.com/foliant-docs/docker/blob/master/Makefile) needed to build Docker images on local computer
 
+## Docker images dependencies
 
-4. dependency_files contains:
-   * imagemagick
-   * python_packages with requirements.txt (contains all packages for Foliant)
-
-# Dockerfile dependencies
-
-Docker images builds based on previous light version in the following order:
+Docker images builds with Dockerfiles based on previous light version in the following order:
 > Dockerfile-slim → Dockerfile → Dockerfile-pandoc → Dockerfile-full
 
-It means that if you update Dockerfile-slim, you should update all its dependants after:
-Dockerfile then Dockerfile-pandoc then Dockerfile-full. If you want to update Dockerfile,
-you should update Dockerfile-pandoc then Dockerfile-full etc.
+It means that if you update `foliant/foliant:slim`, you should update all its dependants after:
+`foliant/foliant` then `foliant/foliant:pandoc` then `foliant/foliant:full`. If you want to update `foliant/foliant`,
+you should update `foliant/foliant:pandoc` then `foliant/foliant:full` etc.
 
-## Which image to update?
+### Which image to update?
 
 * When [Foliant-core]((https://github.com/foliant-docs/foliant)) updates: 
-   > update Dockerfile-slim → Dockerfile → Dockerfile-pandoc → Dockerfile-full
+   > update `foliant/foliant:slim` → `foliant/foliant` → `foliant/foliant:pandoc` → `foliant/foliant:full`
 
 * When [foliantcontrib.init](https://github.com/foliant-docs/foliantcontrib.init) updates:
-   > update Dockerfile → Dockerfile-pandoc → Dockerfile-full
+   > update `foliant/foliant` → `foliant/foliant:pandoc` → `foliant/foliant:full`
 
 * When [foliantcontrib.pandoc](https://github.com/foliant-docs/foliantcontrib.pandoc) updates: 
-   > update Dockerfile-pandoc → Dockerfile-full
+   > update `foliant/foliant:pandoc` → `foliant/foliant:full`
 
 * When any other Foliant extension updates: 
-   > update Dockerfile-full and [requirements.txt](https://github.com/foliant-docs/docker/blob/master/dependency_files/python_packages/requirements.txt) 
+   > update `foliant/foliant:full` and [requirements.txt](https://github.com/foliant-docs/docker/blob/master/dependency_files/python_packages/requirements.txt) 
    > from `dependency_files/python_packages/requirements.txt`
 
-# Update procedure
+## Update procedure
 To update Docker-image on Docker Hub you should:
 1. Clone, pull or download this repo on your computer.
-2. Update Docker-images you need.
+2. Update dependencies if needed.
 3. Push changes to this repo.
-4. Run script which related to Docker-image you updated:
+4. Run script which related to Docker-image you needed:
+
 ```bash
 # In the project directory
 
-sh build_slim.sh    # for Dockerfile-slim
-sh build_latest.sh  # for Dockerfile
-sh build_pandoc.sh  # for Dockerfile-pandoc
-sh build_full.sh    # for Dockerfile-full
+./build_slim.sh    # for foliant/foliant:slim
+./build_latest.sh  # for foliant/foliant
+./build_pandoc.sh  # for foliant/foliant:pandoc
+./build_full.sh    # for foliant/foliant:full
 ```
 
-### How to tag image (optional)
-If you want to tag image, write its title after script:
+#### How to tag image (optional)
+Scripts set tag for published image automatically. But you can tag the image manually as script parameter:
 ```bash
-sh build_full.sh 1.0.13
+./build_full.sh 1.0.13
 ```
 
-### Docker Hub authorization
+#### Docker Hub authorization
 To push images to [Foliant project on Docker Hub](https://hub.docker.com/r/foliant/foliant/), 
 you should be logged in as **foliantshared**
-
-## Project links
-[Foliant-core repo](https://github.com/foliant-docs/foliant)
-
-[Docker Hub repo with Foliant images](https://hub.docker.com/r/foliant/foliant)
-
-[Foliant Documentation website](https://foliant-docs.github.io/docs/)
-
-[foliantcontrib.init](https://github.com/foliant-docs/foliantcontrib.init)
-
-[foliantcontrib.pandoc](https://github.com/foliant-docs/foliantcontrib.pandoc)
