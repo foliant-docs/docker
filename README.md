@@ -4,7 +4,9 @@ Docker is a project that helps develop, update and publish Docker images for Fol
 ## Overview
 There are four Docker images to build different versions of Foliant. 
 This repo contains Dockerfiles to build each Docker image. 
-Also, each Dockerfile has its own build-and-publish script to publish images to [Docker Hub](https://hub.docker.com/r/foliant/foliant/tags).
+Also,
+each Dockerfile has its own build-and-publish script
+to publish images to [Docker Hub](https://hub.docker.com/r/foliant/foliant/tags).
 
 * `foliant/foliant:slim` — minimal image of Foliant core with no extensions.
   * [Dockerfile-slim](https://github.com/foliant-docs/docker/blob/master/Dockerfile-slim)
@@ -25,7 +27,7 @@ TexLive and Pandoc for building PDF and DOCX
 
 ## Docker images dependencies
 
-Docker images builds with Dockerfiles based on previous light version in the following order:
+Docker images build with Dockerfiles based on a previous light version in the following order:
 > Dockerfile-slim → Dockerfile → Dockerfile-pandoc → Dockerfile-full
 
 It means that if you update `foliant/foliant:slim`, you should update all its dependants after:
@@ -48,11 +50,11 @@ you should update `foliant/foliant:pandoc` then `foliant/foliant:full` etc.
    > from `dependency_files/python_packages/requirements.txt`
 
 ## Update procedure
-To update Docker-image on Docker Hub you should:
+To update Docker-image on Docker Hub, you should:
 1. Clone, pull or download this repo on your computer.
 2. Update dependencies if needed.
 3. Push changes to this repo.
-4. Run script which related to Docker-image you needed:
+4. Run a script which related to Docker-image you needed:
 
 ```bash
 # In the project directory
@@ -70,5 +72,5 @@ Scripts set tag for published image automatically. But you can tag the image man
 ```
 
 #### Docker Hub authorization
-To push images to [Foliant project on Docker Hub](https://hub.docker.com/r/foliant/foliant/), 
+To push images to the [Foliant project on Docker Hub](https://hub.docker.com/r/foliant/foliant/), 
 you should be logged in as **foliantshared**
