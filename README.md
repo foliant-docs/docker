@@ -12,10 +12,10 @@ to publish images to [Docker Hub](https://hub.docker.com/r/foliant/foliant/tags)
   * [Dockerfile-slim](https://github.com/foliant-docs/docker/blob/master/Dockerfile-slim)
   * [build_slim.sh](https://github.com/foliant-docs/docker/blob/master/build_slim.sh)
 
-* `foliant/foliant` — the default image with Foliant core and the `init` extension
+* `foliant/foliant` — the default image with Foliant core and the foliantcontrib.init extension
   * [Dockerfile](https://github.com/foliant-docs/docker/blob/master/Dockerfile)
   * [build_latest.sh](https://github.com/foliant-docs/docker/blob/master/build_latest.sh)
-* `foliant/foliant:pandoc` — the default image with foliantcontrib.pandoc and its dependencies:
+* `foliant/foliant:pandoc` — the image with foliantcontrib.pandoc and its dependencies:
 TexLive and Pandoc for building PDF and DOCX
   * [Dockerfile-pandoc](https://github.com/foliant-docs/docker/blob/master/Dockerfile-pandoc)
   * [build_pandoc.sh](https://github.com/foliant-docs/docker/blob/master/build_pandoc.sh)
@@ -36,7 +36,7 @@ you should update `foliant/foliant:pandoc` then `foliant/foliant:full` etc.
 
 ### Which image to update?
 
-* When [Foliant-core]((https://github.com/foliant-docs/foliant)) updates: 
+* When [Foliant-core](https://github.com/foliant-docs/foliant) updates: 
    > update `foliant/foliant:slim` → `foliant/foliant` → `foliant/foliant:pandoc` → `foliant/foliant:full`
 
 * When [foliantcontrib.init](https://github.com/foliant-docs/foliantcontrib.init) updates:
@@ -72,5 +72,5 @@ Scripts set tag for published image automatically. But you can tag the image man
 ```
 
 #### Docker Hub authorization
-To push images to the [Foliant project on Docker Hub](https://hub.docker.com/r/foliant/foliant/), 
-you should be logged in as **foliantshared**
+To push images to the [Foliant project on Docker Hub](https://hub.docker.com/r/foliant/foliant/),
+you need an account on Docker Hub with appropriate rights.
