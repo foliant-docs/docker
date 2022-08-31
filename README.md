@@ -66,7 +66,7 @@ To update Docker-image on Docker Hub, you should:
 ```
 
 #### How to tag image (optional)
-Scripts set tag for published image automatically. But you can tag the image manually as script parameter:
+Scripts set tag for published image automatically. But you can tag the image manually as a script parameter:
 ```bash
 ./build_full.sh 1.0.13
 ```
