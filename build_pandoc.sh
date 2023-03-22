@@ -16,9 +16,16 @@ fi
 
 echo "Building and pushing the pandoc image for Foliant ${FOLIANT_VERSION}"
 
-docker pull foliant/foliant
-docker login
-docker build --no-cache -t foliant/foliant:pandoc -t foliant/foliant:${FOLIANT_VERSION}-pandoc -f Dockerfile-pandoc ./ 2>&1 | tee ./build.log
-docker push foliant/foliant:pandoc
-docker push foliant/foliant:${FOLIANT_VERSION}-pandoc
-docker logout
+DOCKER_IMAGE_TAG=foliant/foliant:pandoc
+DOCKER_IMAGE_NUMBERED_TAG=foliant/foliant:${FOLIANT_VERSION}-pandoc
+GITHUB_REGISTRY_URL=ghcr.io
+ORGANIZATION=foliant-docs
+
+docker pull $GITHUB_REGISTRY_URL/$ORGANIZATION/foliant/foliant
+docker login $GITHUB_REGISTRY_URL
+docker build --no-cache -t $DOCKER_IMAGE_TAG -t $DOCKER_IMAGE_NUMBERED_TAG -f Dockerfile-pandoc ./ 2>&1 | tee ./build.log
+docker tag $DOCKER_IMAGE_TAG $GITHUB_REGISTRY_URL/$ORGANIZATION/$DOCKER_IMAGE_TAG
+docker push $GITHUB_REGISTRY_URL/$ORGANIZATION/$DOCKER_IMAGE_TAG
+docker tag $DOCKER_IMAGE_NUMBERED_TAG $GITHUB_REGISTRY_URL/$ORGANIZATION/$DOCKER_IMAGE_NUMBERED_TAG
+docker push $GITHUB_REGISTRY_URL/$ORGANIZATION/$DOCKER_IMAGE_NUMBERED_TAG
+docker logout $GITHUB_REGISTRY_URL
