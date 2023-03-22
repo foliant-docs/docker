@@ -16,9 +16,16 @@ fi
 
 echo "Building and pushing the slim image for Foliant ${FOLIANT_VERSION}"
 
+DOCKER_IMAGE_TAG=foliant/foliant:slim
+DOCKER_IMAGE_NUMBERED_TAG=foliant/foliant:${FOLIANT_VERSION}-slim
+GITHUB_REGISTRY_URL=ghcr.io
+ORGANIZATION=foliant-docs
+
 docker pull ubuntu:focal
-docker login
-docker build --no-cache --build-arg VERSION=${FOLIANT_VERSION} -t foliant/foliant:slim -t foliant/foliant:${FOLIANT_VERSION}-slim -f Dockerfile-slim ./ 2>&1 | tee ./build.log
-docker push foliant/foliant:slim
-docker push foliant/foliant:${FOLIANT_VERSION}-slim
-docker logout
+docker login $GITHUB_REGISTRY_URL
+docker build --no-cache --build-arg VERSION=${FOLIANT_VERSION} -t $DOCKER_IMAGE_TAG -t $DOCKER_IMAGE_NUMBERED_TAG -f Dockerfile-slim ./ 2>&1 | tee ./build.log
+docker tag $DOCKER_IMAGE_TAG $GITHUB_REGISTRY_URL/$ORGANIZATION/$DOCKER_IMAGE_TAG
+docker push $GITHUB_REGISTRY_URL/$ORGANIZATION/$DOCKER_IMAGE_TAG
+docker tag $DOCKER_IMAGE_NUMBERED_TAG $GITHUB_REGISTRY_URL/$ORGANIZATION/$DOCKER_IMAGE_NUMBERED_TAG
+docker push $GITHUB_REGISTRY_URL/$ORGANIZATION/$DOCKER_IMAGE_NUMBERED_TAG
+docker logout $GITHUB_REGISTRY_URL

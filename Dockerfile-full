@@ -1,4 +1,4 @@
-FROM foliant/foliant:pandoc
+FROM ghcr.io/foliant-docs/foliant/foliant:pandoc
 
 RUN apt update
 
