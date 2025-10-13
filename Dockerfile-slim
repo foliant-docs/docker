@@ -3,11 +3,23 @@ FROM ubuntu:focal
 LABEL authors="Konstantin Molchanov <moigagoo@live.com>"
 
 ARG VERSION
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update && apt install -y git python3 python3-pip
-RUN pip3 install foliant>=$VERSION
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    python3.9 \
+    python3-pip \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
 
-RUN apt install -y locales && locale-gen en_US.UTF-8
+RUN pip3 install poetry
+
+RUN git clone -b add-partial-copy https://github.com/foliant-docs/foliant.git \
+    && cd foliant \
+    && poetry build --format=wheel \
+    && pip3 install dist/*.whl 
+
+RUN apt-get install -y locales && locale-gen en_US.UTF-8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 ENTRYPOINT [ "foliant" ]
