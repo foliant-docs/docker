@@ -78,6 +78,6 @@ RUN cd /usr/src/app/dependency_files/python_packages/ \
     && pip3 install -r ./requirements.txt \
     && pip3 install --no-compile -r ./requirements_no_compile.txt
 
-ENV PLANTUML_LIMIT_SIZE 100000
+ENV PLANTUML_LIMIT_SIZE=100000
 
 WORKDIR /usr/src/app/
