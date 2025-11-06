@@ -1,8 +1,8 @@
 FROM docker.io/foliant/foliant:pandoc
 
-RUN apt update
-
-RUN apt install --reinstall ca-certificates
+RUN apt update \
+    && apt-get install wget \
+    && apt install --reinstall ca-certificates
 
 COPY ./dependency_files/ /usr/src/app/dependency_files/
 
@@ -13,11 +13,17 @@ RUN rm -rf /etc/ImageMagick-6/policy.xml \
     && cp /usr/src/app/dependency_files/imagemagick/policy.xml /etc/ImageMagick-6/
 
 # Needed for Puppeteer
-RUN apt install -y libasound2
+RUN apt install -y libasound2t64=1.2.11-1ubuntu0.1
 
-RUN wget -q -O - https://deb.nodesource.com/setup_18.x | bash
+# RUN wget -q -O - https://deb.nodesource.com/setup_20.x | bash
 
-RUN apt install -y nodejs
+# TODO: comment the next block and uncomment previous one
+# Uncomment on the next line and comment on the previous one if your region has problems accessing deb.nodesource.com
+RUN curl -fsSL https://nodejs.org/dist/v20.18.0/node-v20.18.0-linux-x64.tar.xz -o node.tar.xz && \
+    tar -xJf node.tar.xz -C /usr/local --strip-components=1 && \
+    rm node.tar.xz
+
+ENV PATH=/usr/local/bin:$PATH
 
 RUN npm install -g puppeteer
 
@@ -35,11 +41,12 @@ RUN npm install -g @argdown/image-export --unsafe-perm
 #######################
 
 # MS SQL Server
-RUN apt-get install -y unixodbc-dev
-RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-RUN wget -O /etc/apt/sources.list.d/mssql-release.list https://packages.microsoft.com/config/ubuntu/20.04/prod.list
-RUN apt-get update
-RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
+RUN apt-get update && \
+    apt-get install -y curl gnupg && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+    curl https://packages.microsoft.com/config/ubuntu/24.04/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && \
+    ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
 # MySQL
 RUN apt-get install -y mysql-server libmysqlclient-dev
@@ -66,18 +73,26 @@ RUN mkdir -p /usr/src/app/dependency_files/slate/ \
     && bundle install
 
 # Needed for Confluence backend
-RUN apt install -y libkrb5-dev
+RUN apt install -y \
+    libkrb5-dev \
+    graphviz \
+    libgraphviz-dev \
+    plantuml \
+    && wget -O /usr/share/plantuml/plantuml.jar http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
 
-RUN apt install -y graphviz libgraphviz-dev
-
-RUN apt install -y plantuml && wget -O /usr/share/plantuml/plantuml.jar http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
+ENV PLANTUML_LIMIT_SIZE=100000
 
 RUN pip3 install --upgrade pip
+
+RUN apt install -y \
+    python3-dev \
+    build-essential \
+    libjpeg-dev \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN cd /usr/src/app/dependency_files/python_packages/ \
     && pip3 install -r ./requirements.txt \
     && pip3 install --no-compile -r ./requirements_no_compile.txt
-
-ENV PLANTUML_LIMIT_SIZE=100000
 
 WORKDIR /usr/src/app/
