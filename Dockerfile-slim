@@ -16,6 +16,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip3 install poetry
 
+# TODO: make install from PyPi
 RUN git clone -b add-partial-copy https://github.com/foliant-docs/foliant.git \
     && cd foliant \
     && poetry build --format=wheel \
