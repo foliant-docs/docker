@@ -10,7 +10,7 @@ fi
 
 if [ ! $1 ] ; then
     # TODO: switch add-partial-copy to master
-    FOLIANT_VERSION=`curl https://raw.githubusercontent.com/foliant-docs/foliant/fix-partial-copy/foliant/__init__.py | grep -${grep_option}o "\d+\.\d+\.\d+"`
+    FOLIANT_VERSION=`curl https://raw.githubusercontent.com/foliant-docs/foliant/add-partial-copy/foliant/__init__.py | grep -${grep_option}o "\d+\.\d+\.\d+"`
 else
     FOLIANT_VERSION=$1
 fi
