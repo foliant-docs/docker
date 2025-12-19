@@ -1,6 +1,6 @@
 # TODO: uncomment
-# FROM ghcr.io/foliant-docs/foliant/foliant:pandoc
-FROM docker.io/foliant/foliant:pandoc
+FROM ghcr.io/foliant-docs/foliant/foliant:1.0.14-pandoc
+# FROM docker.io/foliant/foliant:1.0.14-pandoc
 
 RUN apt update \
     && apt install --reinstall ca-certificates \

@@ -1,6 +1,6 @@
 # TODO: uncomment
-# FROM ghcr.io/foliant-docs/foliant/foliant:latest
-FROM docker.io/foliant/foliant:latest
+FROM ghcr.io/foliant-docs/foliant/foliant:1.0.14
+# FROM docker.io/foliant/foliant:1.0.14
 
 # RUN apt-get update && \
 #     apt-get install -y \
