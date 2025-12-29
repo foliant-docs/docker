@@ -1,6 +1,4 @@
-# TODO: uncomment
 FROM ghcr.io/foliant-docs/foliant/foliant:1.0.14-pandoc
-# FROM docker.io/foliant/foliant:1.0.14-pandoc
 
 RUN apt update \
     && apt install --reinstall ca-certificates \
@@ -17,13 +15,12 @@ COPY ./dependency_files/ /usr/src/app/dependency_files/
 RUN rm -rf /etc/ImageMagick-6/policy.xml \
     && cp /usr/src/app/dependency_files/imagemagick/policy.xml /etc/ImageMagick-6/
 
-# RUN wget -q -O - https://deb.nodesource.com/setup_20.x | bash
+RUN wget -q -O - https://deb.nodesource.com/setup_20.x | bash
 
-# TODO: comment the next block and uncomment previous one
 # Uncomment on the next line and comment on the previous one if your region has problems accessing deb.nodesource.com
-RUN curl -fsSL https://nodejs.org/dist/v20.18.0/node-v20.18.0-linux-x64.tar.xz -o node.tar.xz && \
-    tar -xJf node.tar.xz -C /usr/local --strip-components=1 && \
-    rm node.tar.xz
+# RUN curl -fsSL https://nodejs.org/dist/v20.18.0/node-v20.18.0-linux-x64.tar.xz -o node.tar.xz && \
+#     tar -xJf node.tar.xz -C /usr/local --strip-components=1 && \
+#     rm node.tar.xz
 
 ENV PATH=/usr/local/bin:$PATH
 
@@ -77,14 +74,6 @@ RUN apt install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PLANTUML_LIMIT_SIZE=100000
-
-# RUN apt install -y \
-#     python3-dev \
-#     build-essential \
-#     libjpeg-dev \
-#     zlib1g-dev \
-#     && apt-get clean \
-#     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade pip \
     && cd /usr/src/app/dependency_files/python_packages/ \

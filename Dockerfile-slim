@@ -16,16 +16,13 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# RUN python3 -m venv /opt/venv
-# ENV PATH="/opt/venv/bin:$PATH"
-
 RUN pip3 install poetry==2.1.1
 
 # TODO: make install from PyPi
 RUN git clone -b add-partial-copy https://github.com/foliant-docs/foliant.git \
     && cd foliant \
     && poetry build --format=wheel \
-    && pip3 install dist/*.whl 
+    && pip3 install dist/*.whl
 
 RUN apt-get update \
     && apt-get install -y locales \
