@@ -16,6 +16,7 @@ RUN rm -rf /etc/ImageMagick-6/policy.xml \
     && cp /usr/src/app/dependency_files/imagemagick/policy.xml /etc/ImageMagick-6/
 
 RUN wget -q -O - https://deb.nodesource.com/setup_20.x | bash
+RUN apt install -y nodejs
 
 # Uncomment on the next line and comment on the previous one if your region has problems accessing deb.nodesource.com
 # RUN curl -fsSL https://nodejs.org/dist/v20.18.0/node-v20.18.0-linux-x64.tar.xz -o node.tar.xz && \
