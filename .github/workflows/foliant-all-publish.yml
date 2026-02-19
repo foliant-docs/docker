@@ -1,0 +1,53 @@
+name: Build and Push all Foliant images to GitHub registry
+
+on: workflow_dispatch
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+
+      - name: Build and push slim image
+        run: |
+          echo "Building foliant/foliant:slim..."
+          chmod +x build_slim.sh
+          ./build_slim.sh
+          echo "✅ Slim image built and pushed"
+
+      - name: Build and push latest image
+        run: |
+          echo "Building foliant/foliant:latest..."
+          chmod +x build_latest.sh
+          ./build_latest.sh
+          echo "✅ Latest image built and pushed"
+
+      - name: Build and push pandoc image
+        run: |
+          echo "Building foliant/foliant:pandoc..."
+          chmod +x build_pandoc.sh
+          ./build_pandoc.sh
+          echo "✅ Pandoc image built and pushed"
+
+      - name: Build and push full image
+        run: |
+          echo "Building foliant/foliant:full..."
+          chmod +x build_full.sh
+          ./build_full.sh
+          echo "✅ Full image built and pushed"
+
+      - name: Completion message
+        run: |
+          echo "All Foliant images have been successfully built and pushed!"
+          echo "Images pushed:"
+          echo "  - foliant/foliant:slim"
+          echo "  - foliant/foliant:pandoc"
+          echo "  - foliant/foliant:latest"
+          echo "  - foliant/foliant:full"
