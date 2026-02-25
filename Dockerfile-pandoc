@@ -1,5 +1,5 @@
 # TODO: uncomment
-FROM ghcr.io/foliant-docs/foliant/foliant:1.0.14
+FROM ghcr.io/foliant-docs/foliant/foliant
 
 RUN apt update && apt install -y wget texlive-full librsvg2-bin
 
