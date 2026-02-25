@@ -19,10 +19,12 @@ RUN apt-get update \
 RUN pip3 install poetry==2.1.1
 
 # TODO: make install from PyPi
-RUN git clone -b add-partial-copy https://github.com/foliant-docs/foliant.git \
-    && cd foliant \
-    && poetry build --format=wheel \
-    && pip3 install dist/*.whl
+# RUN git clone -b add-partial-copy https://github.com/foliant-docs/foliant.git \
+#     && cd foliant \
+#     && poetry build --format=wheel \
+#     && pip3 install dist/*.whl
+
+RUN pip3 install foliant>=$VERSION
 
 RUN apt-get update \
     && apt-get install -y locales \
