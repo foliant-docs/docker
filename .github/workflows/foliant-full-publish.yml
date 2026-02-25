@@ -18,6 +18,19 @@ jobs:
         # This is where you will update the personal access token to GITHUB_TOKEN
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
+      - name: Clean runner
+        run: |
+          echo "=== CLEANING DOCKER ==="
+          docker system prune -a -f --volumes
+          docker system df
+
+          echo -e "\n=== CLEANING APT CACHE ==="
+          sudo apt-get clean
+          sudo apt-get autoremove -y
+          sudo apt-get autoclean
+
+          df -h
+
       - name: Push image
         run: |
           chmod +x build_full.sh

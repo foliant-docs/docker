@@ -1,14 +1,40 @@
-FROM ubuntu:focal
+FROM ubuntu:20.04
 
 LABEL authors="Konstantin Molchanov <moigagoo@live.com>"
 
 ARG VERSION
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update && apt install -y git python3 python3-pip
-RUN pip3 install foliant>=$VERSION
+RUN apt-get update \
+    && apt-get install -y \
+        curl \
+        git \
+        python3.9 \
+        python3-pip \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt install -y locales && locale-gen en_US.UTF-8
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+RUN pip3 install poetry==2.1.1
+
+# TODO: make install from PyPi
+RUN git clone -b add-partial-copy https://github.com/foliant-docs/foliant.git \
+    && cd foliant \
+    && poetry build --format=wheel \
+    && pip3 install dist/*.whl
+
+RUN apt-get update \
+    && apt-get install -y locales \
+    && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
+    && locale-gen en_US.UTF-8 \
+    && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
 
 ENTRYPOINT [ "foliant" ]
 CMD []
